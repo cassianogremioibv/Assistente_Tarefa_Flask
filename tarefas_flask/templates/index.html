@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Tarefas App</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+
+</head>
+    <body>
+        <div>
+            <h1>Lista de Tarefas</h1>
+            <form action="/add" method="post">
+                <div>
+                    <label>Digite uma Tarefa</label>
+                    <input type="text" name="name">
+                    <button type="submit">Incluir</button>    
+                </div>
+            </form><br><br>
+            <table>
+                <body>
+                    {%for fazer in fazer_list%}
+                    <tr>
+                        <td>{{fazer.task_id}}</td>
+                        <td>{{fazer.name}}</td>
+                        {%if fazer.feito==False%}
+                        <td>Pendente</td>
+                        {%else%} 
+                        <td>Feito</td>   
+                        {%endif%}
+                        <td><a href="/atualizar/{{fazer.task_id}}">Atualizar</a>
+                            <td><a href="/delete/{{fazer.task_id}}">Deletar</a>
+                    </tr>
+                    {%endfor%}
+                </body>
+            </table>
+        </div>
+    </body>
+</html>
+
